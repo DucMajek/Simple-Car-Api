@@ -26,9 +26,3 @@ This repository contains the backend code for a simple Car Management System API
 #### `GET /popular`
 * Returns a list of top cars in the database.
 * Ranking is based on the number of rates received (not on average rate values).
-
-## Getting Started
-1. Clone the repository.
-   ```bash
-   git clone https://github.com/DucMajek/Simple-Car-Api.git
-   ```
