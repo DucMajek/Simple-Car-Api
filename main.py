@@ -1,5 +1,5 @@
 from fastapi import FastAPI, Depends
-from models import RateCar
+from models import *
 from services import *
 
 
@@ -13,7 +13,12 @@ async def cars(name: str, model: str):
 
 @app.post("/rate", response_model=RateCar, tags=["Rate Car"])
 async def rate_car(data: RateCar = Depends()):
-    await rate_car(data.model, int(data.choice.value))
+    try:
+        Rate(data.choice)
+    except ValueError:
+        raise HTTPException(status_code=422, detail="Invalid choice value")
+
+    await set_rate_car(data.model, data.choice)
     return {"model": data.model, "choice": data.choice}
 
 
@@ -25,5 +30,3 @@ async def average_rate_cars():
 @app.get('/popular', tags=["Popular cars"])
 async def popular_cars():
     return get_popular_cars()
-
-

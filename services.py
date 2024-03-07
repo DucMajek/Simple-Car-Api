@@ -54,23 +54,23 @@ def is_exist_in_db(name: str):
         return False
 
 
-def rate_car(name: str, rate: int):
+def set_rate_car(name: str, rate: int):
     name_to_lower = name.lower()
     if not is_exist_in_db(name_to_lower):
         raise HTTPException(status_code=404, detail="Car not found")
-    id_car = get_id_car(name)
+    id_car = get_id_car(name_to_lower)
     id_rate = get_id_rate(id_car)
-    update_value_car(id_rate, rate)
+    update_value_car(_mysql_connector,id_rate, rate)
     raise HTTPException(status_code=200, detail="Rating added successfully")
 
 
-def update_value_car(id: int, rate: int):
+def update_value_car(db: MySQLConnector, id: int, rate: int):
     mycursor = _mysql_connector.mydb.cursor()
     query = ("Update rate Set count = count + 1, rate_sum = rate_sum + %s,  "
              "average_rate = round((rate_sum + %s) / (count + 1),2) WHERE id_rate = %s")
     values = (rate, rate, id)
     mycursor.execute(query, values)
-    _mysql_connector.mydb.commit()
+    db.mydb.commit()
 
 
 def get_id_rate(id: int):

@@ -12,4 +12,4 @@ class Rate(Enum):
 
 class RateCar(BaseModel):
     model: str
-    choice: Rate
+    choice: int
