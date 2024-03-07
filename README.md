@@ -32,17 +32,3 @@ This repository contains the backend code for a simple Car Management System API
    ```bash
    git clone https://github.com/DucMajek/Simple-Car-Api.git
    ```
-
-2. Install dependencies.
-   ```bash
-   npm install
-   ```
-
-3. Set up environment variables.
-   - Create a `.env` file based on the provided `.env.example` template.
-   - Provide the necessary API keys and configurations.
-
-4. Run the application.
-   ```bash
-   npm start
-   ```
